@@ -174,11 +174,8 @@
 </template>
 
 <script>
-  var fireballSize = 100;  <!-- Не пойму зачем тут лишний скрипт, если в задании указано его переопределить в новом скрипте. Его удалить? -->
-</script>
-<script>
-  var fireballSize = 22,
-      getFireballSpeed = function (left) {
+  var fireballSize = 22;
+  var getFireballSpeed = function(left) {
         return left ? 5 : 2;
       };
 
