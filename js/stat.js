@@ -36,11 +36,7 @@ window.renderStatistics = function (ctx, names, times) {
   for (i = 0; i < times.length; i++) {
     var barHeight = times[i] * step;
 
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'hsl(240, ' + Math.random() * 101 + '%, 50%)';
-    }
+    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + Math.random() * 101 + '%, 50%)';
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
