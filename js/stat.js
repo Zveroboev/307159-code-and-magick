@@ -29,7 +29,7 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var barSpaceWithout = 50;
   var barSpaceTotal = barWidth + barSpaceWithout;
-  var color = {
+  var barColor = {
     'format': 'hsl',
     'hue': 240,
     'saturation': function () {
@@ -46,7 +46,7 @@ window.renderStatistics = function (ctx, names, times) {
   for (i = 0; i < times.length; i++) {
     var barHeight = times[i] * step;
 
-    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : color.getRandomColor();
+    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : barColor.getRandomColor();
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
