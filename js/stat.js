@@ -1,19 +1,6 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-
-  var color = {
-    'format': 'hsl',
-    'hue': 240,
-    'saturation': function () {
-      return Math.random() * 101 + '%';
-    },
-    'lightness': '50%',
-    'getRandomColor': function () {
-      return this.format + '(' + this.hue + ', ' + this.saturation() + ', ' + this.lightness;
-    }
-  };
-
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
 
@@ -42,6 +29,17 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var barSpaceWithout = 50;
   var barSpaceTotal = barWidth + barSpaceWithout;
+  var color = {
+    'format': 'hsl',
+    'hue': 240,
+    'saturation': function () {
+      return Math.random() * 101 + '%';
+    },
+    'lightness': '50%',
+    'getRandomColor': function () {
+      return this.format + '(' + this.hue + ', ' + this.saturation() + ', ' + this.lightness + ')';
+    }
+  };
 
   step = -step; // Делаю значение отрицательным т.к. диаграмма строится снизу-вверх, а для этого нужно отрицательное значение высоты.
 
