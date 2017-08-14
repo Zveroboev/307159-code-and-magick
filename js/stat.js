@@ -29,26 +29,18 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var barSpaceWithout = 50;
   var barSpaceTotal = barWidth + barSpaceWithout;
-  var barColor = {
-    'format': 'hsl',
-    'hue': 240,
-    'saturation': function () {
-      return Math.random() * 101 + '%';
-    },
-    'lightness': '50%',
-    'getRandomColor': function () {
-      return this.format + '(' + this.hue + ', ' + this.saturation() + ', ' + this.lightness + ')';
-    }
+  var getHSL = function (hue, saturation, lightness) {
+    return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
   };
 
   for (i = 0; i < times.length; i++) {
     var barHeight = -times[i] * step; // Делаю значения отрицательным т.к. для построения диаграммы снизу-вверх нужна отрицательная высота
 
-    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : barColor.getRandomColor();
+    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getHSL(240, Math.round(Math.random() * 100), 50);
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], initialX + barSpaceTotal * i, initialY + 5);
-    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY - barHeight - 20);
+    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY + barHeight - 20);
   }
 };
