@@ -25,6 +25,7 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var barSpaceWithout = 50;
   var barSpaceTotal = barWidth + barSpaceWithout;
+  var textIndent = 20;
 
   for (var i = 0; i < times.length; i++) {
     var barHeight = times[i] * step;
@@ -33,7 +34,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, -barHeight);
 
     ctx.fillStyle = '#000';
-    ctx.fillText(names[i], initialX + barSpaceTotal * i, initialY + 5);
-    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY - barHeight - 20);
+    ctx.fillText(names[i], initialX + barSpaceTotal * i, initialY + textIndent / 2);
+    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY - barHeight - textIndent);
   }
 };
