@@ -2,6 +2,18 @@
 
 window.renderStatistics = function (ctx, names, times) {
 
+  var color = {
+    'format': 'hsl',
+    'hue': 240,
+    'saturation': function () {
+      return Math.random() * 101 + '%';
+    },
+    'lightness': '50%',
+    'getRandomColor': function () {
+      return this.format + '(' + this.hue + ', ' + this.saturation() + ', ' + this.lightness;
+    }
+  };
+
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
 
@@ -11,6 +23,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   ctx.fillStyle = '#000';
   ctx.font = 'bold 16px PT Mono';
+  ctx.textBaseline = 'top';
   ctx.fillText('Ура вы победили!', 120, 35);
   ctx.fillText('Список результатов:', 120, 55);
 
@@ -32,11 +45,10 @@ window.renderStatistics = function (ctx, names, times) {
 
   step = -step; // Делаю значение отрицательным т.к. диаграмма строится снизу-вверх, а для этого нужно отрицательное значение высоты.
 
-  ctx.textBaseline = 'top';
   for (i = 0; i < times.length; i++) {
     var barHeight = times[i] * step;
 
-    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'hsl(240, ' + Math.random() * 101 + '%, 50%)';
+    ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : color.getRandomColor();
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
