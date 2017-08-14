@@ -14,14 +14,10 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 35);
   ctx.fillText('Список результатов:', 120, 55);
 
-  var maxTime = -1;
-
-  for (var i = 0; i < times.length; i++) {
-    if (times[i] > maxTime) {
-      maxTime = times[i];
-    }
-  }
-
+  var getHSL = function (hue, saturation, lightness) {
+    return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+  };
+  var maxTime = Math.max.apply(null, times);
   var histogramHeight = 150;
   var step = histogramHeight / maxTime;
   var initialX = 150;
@@ -29,18 +25,15 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var barSpaceWithout = 50;
   var barSpaceTotal = barWidth + barSpaceWithout;
-  var getHSL = function (hue, saturation, lightness) {
-    return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
-  };
 
-  for (i = 0; i < times.length; i++) {
-    var barHeight = -times[i] * step; // Делаю значения отрицательным т.к. для построения диаграммы снизу-вверх нужна отрицательная высота
+  for (var i = 0; i < times.length; i++) {
+    var barHeight = times[i] * step;
 
     ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : getHSL(240, Math.round(Math.random() * 100), 50);
-    ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
+    ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, -barHeight);
 
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], initialX + barSpaceTotal * i, initialY + 5);
-    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY + barHeight - 20);
+    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY - barHeight - 20);
   }
 };
