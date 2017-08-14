@@ -41,16 +41,14 @@ window.renderStatistics = function (ctx, names, times) {
     }
   };
 
-  step = -step; // Делаю значение отрицательным т.к. диаграмма строится снизу-вверх, а для этого нужно отрицательное значение высоты.
-
   for (i = 0; i < times.length; i++) {
-    var barHeight = times[i] * step;
+    var barHeight = -times[i] * step; // Делаю значения отрицательным т.к. для построения диаграммы снизу-вверх нужна отрицательная высота
 
     ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : barColor.getRandomColor();
     ctx.fillRect(initialX + barSpaceTotal * i, initialY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], initialX + barSpaceTotal * i, initialY + 5);
-    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY + barHeight - 20);
+    ctx.fillText(Math.round(times[i]), initialX + barSpaceTotal * i, initialY - barHeight - 20);
   }
 };
