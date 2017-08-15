@@ -18,46 +18,59 @@ function getRandomEyesColor(eyesColor) {
   return eyesColor[getRandomArbitrary(eyesColor)];
 }
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-// userDialog.querySelector('.setup-similar').classList.remove('hidden');
+function renderWizard(wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
 
-var WIZZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
-var COAT_COLOR = [
-  'rgb(101, 137, 164)',
-  'rgb(241, 43, 107)',
-  'rgb(146, 100, 161)',
-  'rgb(56, 159, 117)',
-  'rgb(215, 210, 55)',
-  'rgb(0, 0, 0)'
-];
-var wizzard = [
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+  return wizardElement;
+}
+
+var WIZARD_ATTRIBUTES = {
+  WIZARD_NAMES: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
+  WIZARD_SURNAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
+  EYES_COLOR: ['black', 'red', 'blue', 'yellow', 'green'],
+  COAT_COLOR: [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ]
+};
+var wizards = [
   {
-    name: getRandomName(WIZZARD_NAMES, WIZZARD_SURNAMES),
-    coatColor: getRandomCoatColor(COAT_COLOR),
-    eyesColor: getRandomEyesColor(EYES_COLOR)
+    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
+    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
   },
   {
-    name: getRandomName(WIZZARD_NAMES, WIZZARD_SURNAMES),
-    coatColor: getRandomCoatColor(COAT_COLOR),
-    eyesColor: getRandomEyesColor(EYES_COLOR)
+    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
+    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
   },
   {
-    name: getRandomName(WIZZARD_NAMES, WIZZARD_SURNAMES),
-    coatColor: getRandomCoatColor(COAT_COLOR),
-    eyesColor: getRandomEyesColor(EYES_COLOR)
+    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
+    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
   },
   {
-    name: getRandomName(WIZZARD_NAMES, WIZZARD_SURNAMES),
-    coatColor: getRandomCoatColor(COAT_COLOR),
-    eyesColor: getRandomEyesColor(EYES_COLOR)
+    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
+    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
   }
 ];
+var userDialog = document.querySelector('.setup');
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
-console.log(getRandomName(WIZZARD_NAMES, WIZZARD_SURNAMES));
-console.log(getRandomCoatColor(COAT_COLOR));
-console.log(getRandomCoatColor(EYES_COLOR));
+userDialog.classList.remove('hidden');
 
+for (var i = 0; i < wizards.length; i++) {
+  similarListElement.appendChild(renderWizard(wizards[i]));
+}
 
+userDialog.querySelector('.setup-similar').classList.remove('hidden');
