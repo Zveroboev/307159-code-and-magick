@@ -29,8 +29,8 @@ function getArrayWizards(numberWizards) {
     var randomWizard = {
       name: getRandomValue(WIZARD_ATTRIBUTES.WIZARD_NAMES) + ' ' +
       getRandomValue(WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-      coatColor: getRandomValue(WIZARD_ATTRIBUTES.COAT_COLOR),
-      eyesColor: getRandomValue(WIZARD_ATTRIBUTES.EYES_COLOR)
+      coatColor: getRandomValue(WIZARD_ATTRIBUTES.COAT_COLORS),
+      eyesColor: getRandomValue(WIZARD_ATTRIBUTES.EYES_COLORS)
     };
     wizardsArray.push(randomWizard);
   }
