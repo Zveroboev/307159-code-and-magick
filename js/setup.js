@@ -36,8 +36,8 @@ function renderWizard(wizard) {
 var WIZARD_ATTRIBUTES = {
   WIZARD_NAMES: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
   WIZARD_SURNAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
-  EYES_COLOR: ['black', 'red', 'blue', 'yellow', 'green'],
-  COAT_COLOR: [
+  EYES_COLORS: ['black', 'red', 'blue', 'yellow', 'green'],
+  COAT_COLORS: [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
     'rgb(146, 100, 161)',
