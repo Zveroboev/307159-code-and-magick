@@ -26,13 +26,12 @@ function getArrayWizards(numberWizards) {
   var wizardsArray = [];
 
   for (var i = 0; i < numberWizards; i++) {
-    var randomWizard = {
+    wizardsArray.push({
       name: getRandomValue(WIZARD_ATTRIBUTES.WIZARD_NAMES) + ' ' +
       getRandomValue(WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
       coatColor: getRandomValue(WIZARD_ATTRIBUTES.COAT_COLORS),
       eyesColor: getRandomValue(WIZARD_ATTRIBUTES.EYES_COLORS)
-    };
-    wizardsArray.push(randomWizard);
+    });
   }
   return wizardsArray;
 }
