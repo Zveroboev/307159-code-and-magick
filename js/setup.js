@@ -1,21 +1,26 @@
 'use strict';
 
-function getRandomArbitrary(array) {
+function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function getRandomName(names, surnames) {
-  var randomName = names[getRandomArbitrary(names)];
-  var randomSurname = surnames[getRandomArbitrary(surnames)];
-  return randomName + ' ' + randomSurname;
+function getRandomValue(array) {
+  return array[getRandomIndex(array)];
 }
 
-function getRandomCoatColor(coatColor) {
-  return coatColor[getRandomArbitrary(coatColor)];
-}
+function getArrayWizards(numberWizards) {
+  var wizardsArray = [];
 
-function getRandomEyesColor(eyesColor) {
-  return eyesColor[getRandomArbitrary(eyesColor)];
+  for (var i = 0; i < numberWizards; i++) {
+    var randomWizard = {
+      name: getRandomValue(WIZARD_ATTRIBUTES.WIZARD_NAMES) + ' ' +
+      getRandomValue(WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+      coatColor: getRandomValue(WIZARD_ATTRIBUTES.COAT_COLOR),
+      eyesColor: getRandomValue(WIZARD_ATTRIBUTES.EYES_COLOR)
+    };
+    wizardsArray.push(randomWizard);
+  }
+  return wizardsArray;
 }
 
 function renderWizard(wizard) {
@@ -41,28 +46,9 @@ var WIZARD_ATTRIBUTES = {
     'rgb(0, 0, 0)'
   ]
 };
-var wizards = [
-  {
-    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
-    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
-  },
-  {
-    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
-    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
-  },
-  {
-    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
-    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
-  },
-  {
-    name: getRandomName(WIZARD_ATTRIBUTES.WIZARD_NAMES, WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-    coatColor: getRandomCoatColor(WIZARD_ATTRIBUTES.COAT_COLOR),
-    eyesColor: getRandomEyesColor(WIZARD_ATTRIBUTES.EYES_COLOR)
-  }
-];
+
+var numberWizards = 4;
+var wizards = getArrayWizards(numberWizards);
 var userDialog = document.querySelector('.setup');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
