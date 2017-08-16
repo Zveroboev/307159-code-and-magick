@@ -1,6 +1,10 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
+  function getHSL(hue, saturation, lightness) {
+    return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
+  }
+
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
 
@@ -14,9 +18,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 35);
   ctx.fillText('Список результатов:', 120, 55);
 
-  var getHSL = function (hue, saturation, lightness) {
-    return 'hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)';
-  };
   var maxTime = Math.max.apply(null, times);
   var histogramHeight = 150;
   var step = histogramHeight / maxTime;
