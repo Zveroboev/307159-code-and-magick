@@ -14,12 +14,12 @@ var WIZARD_ATTRIBUTES = {
   ]
 };
 
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+function getRandomIndex(number) {
+  return Math.floor(Math.random() * number);
 }
 
 function getRandomValue(array) {
-  return array[getRandomIndex(array)];
+  return array[getRandomIndex(array.length)];
 }
 
 function getArrayWizards(numberWizards) {
