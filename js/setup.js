@@ -14,6 +14,10 @@ var WIZARD_ATTRIBUTES = {
   ],
   WIZARDS_QUANTITY: 4
 };
+var KEYCODES = {
+  ESC_KEYCODE: 27,
+  ENTER_KEYCODE: 13
+};
 
 var wizards = getArrayWizards(WIZARD_ATTRIBUTES.WIZARDS_QUANTITY);
 
@@ -65,50 +69,44 @@ renderSimilarWizards(wizards);
 
 /* .......................................................... */
 
-function openSetupOnClick() {
-  setup.classList.remove('hidden');
-  closeSetupOnPressEsc();
-  closeSetupOnKeyDown();
-}
-
 function closeSetupOnClick() {
   setup.classList.add('hidden');
 }
 
+function openSetupOnClick() {
+  setup.classList.remove('hidden');
+}
+
 function openSetupOnKeyDown(evt) {
-  if (evt.keyCode === 13) {
-    setup.classList.remove('hidden');
+  if (evt.keyCode === KEYCODES.ENTER_KEYCODE) {
+    openSetupOnClick();
   }
-  closeSetupOnPressEsc();
-  closeSetupOnKeyDown();
 }
 
 function closeSetupOnKeyDown(evt) {
-  if (evt.keyCode === 13) {
-    setup.classList.add('hidden');
+  if (evt.keyCode === KEYCODES.ENTER_KEYCODE) {
+    closeSetupOnClick();
   }
 }
 
 function closeSetupOnPressEsc(evt) {
-  if (evt.keyCode === 27) {
-    setup.classList.add('hidden');
+  if (evt.keyCode === KEYCODES.ESC_KEYCODE && evt.target !== userNameInput) {
+    closeSetupOnClick();
   }
 }
 
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var userNameInput = setup.querySelector('.setup-user-name');
 
-
-document.addEventListener('keydown', closeSetupOnPressEsc);
 setupOpen.addEventListener('keydown', openSetupOnKeyDown);
-setupClose.addEventListener('keydown', closeSetupOnKeyDown);
 setupOpen.addEventListener('click', openSetupOnClick);
+setupClose.addEventListener('keydown', closeSetupOnKeyDown);
 setupClose.addEventListener('click', closeSetupOnClick);
+document.addEventListener('keydown', closeSetupOnPressEsc);
 
 /* .......................................................... */
-
-var userNameInput = setup.querySelector('.setup-user-name');
 
 userNameInput.addEventListener('invalid', function () {
   if (!userNameInput.validity.valid) {
