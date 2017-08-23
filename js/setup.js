@@ -63,14 +63,72 @@ function renderSimilarWizards(similarWizards) {
 
 renderSimilarWizards(wizards);
 
+/* .......................................................... */
+
+function openSetupOnClick() {
+  setup.classList.remove('hidden');
+  closeSetupOnPressEsc();
+  closeSetupOnKeyDown();
+}
+
+function closeSetupOnClick() {
+  setup.classList.add('hidden');
+}
+
+function openSetupOnKeyDown(evt) {
+  if (evt.keyCode === 13) {
+    setup.classList.remove('hidden');
+  }
+  closeSetupOnPressEsc();
+  closeSetupOnKeyDown();
+}
+
+function closeSetupOnKeyDown(evt) {
+  if (evt.keyCode === 13) {
+    setup.classList.add('hidden');
+  }
+}
+
+function closeSetupOnPressEsc(evt) {
+  if (evt.keyCode === 27) {
+    setup.classList.add('hidden');
+  }
+}
+
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 
-setupOpen.addEventListener('click', function () {
-  setup.classList.remove('hidden');
+
+document.addEventListener('keydown', closeSetupOnPressEsc);
+setupOpen.addEventListener('keydown', openSetupOnKeyDown);
+setupClose.addEventListener('keydown', closeSetupOnKeyDown);
+setupOpen.addEventListener('click', openSetupOnClick);
+setupClose.addEventListener('click', closeSetupOnClick);
+
+/* .......................................................... */
+
+var userNameInput = setup.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('invalid', function () {
+  if (!userNameInput.validity.valid) {
+    if (userNameInput.validity.tooShort) {
+      userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+    } else if (userNameInput.validity.tooLong) {
+      userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+    } else if (userNameInput.validity.valueMissing) {
+      userNameInput.setCustomValidity('Обязательное поле');
+    }
+  } else {
+    userNameInput.setCustomValidity('');
+  }
 });
 
-setupClose.addEventListener('click', function () {
-  setup.classList.add('hidden');
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
 });
