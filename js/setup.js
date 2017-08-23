@@ -12,6 +12,13 @@ var WIZARD_ATTRIBUTES = {
     'rgb(215, 210, 55)',
     'rgb(0, 0, 0)'
   ],
+  FIREBALL_COLORS: [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
+  ],
   WIZARDS_QUANTITY: 4
 };
 var KEYCODES = {
@@ -110,23 +117,53 @@ document.addEventListener('keydown', closeSetupOnPressEsc);
 
 userNameInput.addEventListener('invalid', function () {
   if (!userNameInput.validity.valid) {
-    if (userNameInput.validity.tooShort) {
-      userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-    } else if (userNameInput.validity.tooLong) {
-      userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+    if (userNameInput.validity.tooLong) {
+      userNameInput.setCustomValidity('Имя не должно превышать 50-ти символов');
     } else if (userNameInput.validity.valueMissing) {
-      userNameInput.setCustomValidity('Обязательное поле');
+      userNameInput.setCustomValidity('Введите имя персонажа');
     }
   } else {
     userNameInput.setCustomValidity('');
   }
 });
 
-userNameInput.addEventListener('input', function (evt) {
-  var target = evt.target;
-  if (target.value.length < 2) {
-    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else {
-    target.setCustomValidity('');
+/* .......................................................... */
+
+var wizardAttributes = {
+  wizardCoat: document.querySelector('.wizard-coat'),
+  wizardFireball: document.querySelector('.setup-fireball-wrap'),
+  wizardEyes: document.querySelector('.wizard-eyes')
+};
+var counter = makeCounter();
+
+function makeCounter() {
+  var count = 1;
+
+  return function (array) {
+    if (count >= array.length) {
+      count = 0;
+      return count++;
+    }
+    return count++;
+  };
+}
+
+function getNextAttributeColor(evt) {
+  var attributesColor = evt.currentTarget.style;
+
+  switch (evt.currentTarget) {
+    case wizardAttributes.wizardCoat:
+      attributesColor.fill = WIZARD_ATTRIBUTES.COAT_COLORS[counter(WIZARD_ATTRIBUTES.COAT_COLORS)];
+      break;
+    case wizardAttributes.wizardEyes:
+      attributesColor.fill = WIZARD_ATTRIBUTES.EYES_COLORS[counter(WIZARD_ATTRIBUTES.EYES_COLORS)];
+      break;
+    case wizardAttributes.wizardFireball:
+      attributesColor.background = WIZARD_ATTRIBUTES.FIREBALL_COLORS[counter(WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
+      break;
   }
-});
+}
+
+wizardAttributes.wizardCoat.addEventListener('click', getNextAttributeColor);
+wizardAttributes.wizardEyes.addEventListener('click', getNextAttributeColor);
+wizardAttributes.wizardFireball.addEventListener('click', getNextAttributeColor);

@@ -614,6 +614,8 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 .setup-user-name {
+  box-sizing: border-box;
+
   background: transparent;
   border: 0;
   color: #fff;
@@ -626,8 +628,11 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 .setup-user-name:focus {
-  border-bottom: solid 1px #000;
   outline: none;
+}
+
+.setup-user-name:invalid {
+  box-shadow: 0 0 10px red;
 }
 
 .setup-close {
