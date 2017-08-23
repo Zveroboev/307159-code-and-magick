@@ -134,7 +134,9 @@ var wizardAttributes = {
   wizardFireball: document.querySelector('.setup-fireball-wrap'),
   wizardEyes: document.querySelector('.wizard-eyes')
 };
-var counter = makeCounter();
+var coatCounter = makeCounter();
+var eyesCounter = makeCounter();
+var fireballCounter = makeCounter();
 
 function makeCounter() {
   var count = 1;
@@ -142,9 +144,12 @@ function makeCounter() {
   return function (array) {
     if (count >= array.length) {
       count = 0;
+      console.log(count);
+      return count++;
+    } else {
+      console.log(count);
       return count++;
     }
-    return count++;
   };
 }
 
@@ -153,13 +158,13 @@ function getNextAttributeColor(evt) {
 
   switch (evt.currentTarget) {
     case wizardAttributes.wizardCoat:
-      attributesColor.fill = WIZARD_ATTRIBUTES.COAT_COLORS[counter(WIZARD_ATTRIBUTES.COAT_COLORS)];
+      attributesColor.fill = WIZARD_ATTRIBUTES.COAT_COLORS[coatCounter(WIZARD_ATTRIBUTES.COAT_COLORS)];
       break;
     case wizardAttributes.wizardEyes:
-      attributesColor.fill = WIZARD_ATTRIBUTES.EYES_COLORS[counter(WIZARD_ATTRIBUTES.EYES_COLORS)];
+      attributesColor.fill = WIZARD_ATTRIBUTES.EYES_COLORS[eyesCounter(WIZARD_ATTRIBUTES.EYES_COLORS)];
       break;
     case wizardAttributes.wizardFireball:
-      attributesColor.background = WIZARD_ATTRIBUTES.FIREBALL_COLORS[counter(WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
+      attributesColor.background = WIZARD_ATTRIBUTES.FIREBALL_COLORS[fireballCounter(WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
       break;
   }
 }
