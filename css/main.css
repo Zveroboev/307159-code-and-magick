@@ -562,7 +562,7 @@ input[type=radio]:checked + .review-mark-label {
 
   position: absolute;
   left: 50%;
-  top: 100px;
+  top: 80px;
   transform: translateX(-50%);
 
   background: #89a1fd;
@@ -677,6 +677,12 @@ input[type=radio]:checked + .review-mark-label {
   left: 50px;
 }
 
+.setup-player .wizard-coat,
+.setup-player .setup-fireball,
+.setup-player .wizard-eyes {
+  cursor: pointer;
+}
+
 .setup-fireball-wrap {
   position: absolute;
   left: 300px;
@@ -786,6 +792,8 @@ input[type=radio]:checked + .review-mark-label {
 
   background: #1cb34d;
   color: #fff;
+
+  cursor: pointer;
 }
 
 .setup-submit:disabled {

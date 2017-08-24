@@ -76,29 +76,45 @@ renderSimilarWizards(wizards);
 
 /* .......................................................... */
 
-function closeSetupOnClick() {
+function closeSetup() {
   setup.classList.add('hidden');
+
+  // Удаляю обработчики закрытия
+  setupClose.removeEventListener('click', closeSetup);
+  setupClose.removeEventListener('keydown', closeSetupOnKeyDown);
+  document.removeEventListener('keydown', closeSetupOnPressEsc);
+  // Добавляю Обработчики открытия
+  setupOpen.addEventListener('click', openSetup);
+  setupOpen.addEventListener('keydown', openSetupOnKeyDown);
 }
 
-function openSetupOnClick() {
+function openSetup() {
   setup.classList.remove('hidden');
+
+  // Удаляю обработчики открытия
+  setupOpen.removeEventListener('click', openSetup);
+  setupOpen.removeEventListener('click', openSetupOnKeyDown);
+  // Добавляю обработчики закрытия
+  setupClose.addEventListener('click', closeSetup);
+  setupClose.addEventListener('keydown', closeSetupOnKeyDown);
+  document.addEventListener('keydown', closeSetupOnPressEsc);
 }
 
 function openSetupOnKeyDown(evt) {
   if (evt.keyCode === KEYCODES.ENTER_KEYCODE) {
-    openSetupOnClick();
+    openSetup();
   }
 }
 
 function closeSetupOnKeyDown(evt) {
   if (evt.keyCode === KEYCODES.ENTER_KEYCODE) {
-    closeSetupOnClick();
+    closeSetup();
   }
 }
 
 function closeSetupOnPressEsc(evt) {
   if (evt.keyCode === KEYCODES.ESC_KEYCODE && evt.target !== userNameInput) {
-    closeSetupOnClick();
+    closeSetup();
   }
 }
 
@@ -107,25 +123,39 @@ var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 
+setupOpen.addEventListener('click', openSetup);
 setupOpen.addEventListener('keydown', openSetupOnKeyDown);
-setupOpen.addEventListener('click', openSetupOnClick);
-setupClose.addEventListener('keydown', closeSetupOnKeyDown);
-setupClose.addEventListener('click', closeSetupOnClick);
-document.addEventListener('keydown', closeSetupOnPressEsc);
 
 /* .......................................................... */
 
-userNameInput.addEventListener('invalid', function () {
-  if (!userNameInput.validity.valid) {
-    if (userNameInput.validity.tooLong) {
-      userNameInput.setCustomValidity('Имя не должно превышать 50-ти символов');
-    } else if (userNameInput.validity.valueMissing) {
-      userNameInput.setCustomValidity('Введите имя персонажа');
+function onInputSayAboutValidity(evt) {
+  var target = evt.target;
+
+  if (!target.validity.valid) {
+    if (target.validity.tooShort) {
+      target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+    } else if (target.validity.tooLong) {
+      target.setCustomValidity('Имя не должно превышать 25-ти символов');
+    } else if (target.validity.valueMissing) {
+      target.setCustomValidity('Введите имя персонажа');
     }
   } else {
     userNameInput.setCustomValidity('');
   }
-});
+}
+
+function onInputSayAboutLength(evt) {
+  var target = evt.target;
+
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
+}
+
+userNameInput.addEventListener('invalid', onInputSayAboutValidity);
+userNameInput.addEventListener('input', onInputSayAboutLength);
 
 /* .......................................................... */
 
@@ -144,27 +174,25 @@ function makeCounter() {
   return function (array) {
     if (count >= array.length) {
       count = 0;
-      console.log(count);
       return count++;
     } else {
-      console.log(count);
       return count++;
     }
   };
 }
 
 function getNextAttributeColor(evt) {
-  var attributesColor = evt.currentTarget.style;
+  var attributesStyle = evt.currentTarget.style;
 
   switch (evt.currentTarget) {
     case wizardAttributes.wizardCoat:
-      attributesColor.fill = WIZARD_ATTRIBUTES.COAT_COLORS[coatCounter(WIZARD_ATTRIBUTES.COAT_COLORS)];
+      attributesStyle.fill = WIZARD_ATTRIBUTES.COAT_COLORS[coatCounter(WIZARD_ATTRIBUTES.COAT_COLORS)];
       break;
     case wizardAttributes.wizardEyes:
-      attributesColor.fill = WIZARD_ATTRIBUTES.EYES_COLORS[eyesCounter(WIZARD_ATTRIBUTES.EYES_COLORS)];
+      attributesStyle.fill = WIZARD_ATTRIBUTES.EYES_COLORS[eyesCounter(WIZARD_ATTRIBUTES.EYES_COLORS)];
       break;
     case wizardAttributes.wizardFireball:
-      attributesColor.background = WIZARD_ATTRIBUTES.FIREBALL_COLORS[fireballCounter(WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
+      attributesStyle.background = WIZARD_ATTRIBUTES.FIREBALL_COLORS[fireballCounter(WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
       break;
   }
 }
