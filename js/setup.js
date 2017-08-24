@@ -51,8 +51,7 @@ function getArrayWizards(numberWizards) {
 }
 
 function renderWizard(wizard) {
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+  var wizardElement = document.querySelector('#similar-wizard-template').content.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
