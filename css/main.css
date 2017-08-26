@@ -562,7 +562,7 @@ input[type=radio]:checked + .review-mark-label {
 
   position: absolute;
   left: 50%;
-  top: 100px;
+  top: 80px;
   transform: translateX(-50%);
 
   background: #89a1fd;
@@ -614,6 +614,8 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 .setup-user-name {
+  box-sizing: border-box;
+
   background: transparent;
   border: 0;
   color: #fff;
@@ -626,8 +628,11 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 .setup-user-name:focus {
-  border-bottom: solid 1px #000;
   outline: none;
+}
+
+.setup-user-name:invalid {
+  box-shadow: 0 0 10px red;
 }
 
 .setup-close {
@@ -670,6 +675,12 @@ input[type=radio]:checked + .review-mark-label {
   position: absolute;
   bottom: 0;
   left: 50px;
+}
+
+.setup-player .wizard-coat,
+.setup-player .setup-fireball,
+.setup-player .wizard-eyes {
+  cursor: pointer;
 }
 
 .setup-fireball-wrap {
@@ -781,6 +792,8 @@ input[type=radio]:checked + .review-mark-label {
 
   background: #1cb34d;
   color: #fff;
+
+  cursor: pointer;
 }
 
 .setup-submit:disabled {
