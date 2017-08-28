@@ -9,10 +9,10 @@
 
     for (var i = 0; i < numberWizards; i++) {
       wizardsArray.push({
-        name: window.random.getRandomValue(window.WIZARD_ATTRIBUTES.WIZARD_NAMES) + ' ' +
-        window.random.getRandomValue(window.WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
-        coatColor: window.random.getRandomValue(window.WIZARD_ATTRIBUTES.COAT_COLORS),
-        eyesColor: window.random.getRandomValue(window.WIZARD_ATTRIBUTES.EYES_COLORS)
+        name: window.util.getRandomValue(window.WIZARD_ATTRIBUTES.WIZARD_NAMES) + ' ' +
+        window.util.getRandomValue(window.WIZARD_ATTRIBUTES.WIZARD_SURNAMES),
+        coatColor: window.util.getRandomValue(window.WIZARD_ATTRIBUTES.COAT_COLORS),
+        eyesColor: window.util.getRandomValue(window.WIZARD_ATTRIBUTES.EYES_COLORS)
       });
     }
     return wizardsArray;

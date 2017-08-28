@@ -2,11 +2,14 @@
 
 (function () {
 
+  var WIZARDS = window.CONSTATNS.WIZARDS_ATTRIBUTES;
+
   var wizardAttributes = {
     wizardCoat: document.querySelector('.wizard-coat'),
     wizardFireball: document.querySelector('.setup-fireball-wrap'),
     wizardEyes: document.querySelector('.wizard-eyes')
   };
+
   var coatCounter = makeCounter();
   var eyesCounter = makeCounter();
   var fireballCounter = makeCounter();
@@ -29,13 +32,13 @@
 
     switch (evt.currentTarget) {
       case wizardAttributes.wizardCoat:
-        attributesStyle.fill = window.WIZARD_ATTRIBUTES.COAT_COLORS[coatCounter(window.WIZARD_ATTRIBUTES.COAT_COLORS)];
+        attributesStyle.fill = WIZARDS.COAT_COLORS[coatCounter(WIZARDS.COAT_COLORS)];
         break;
       case wizardAttributes.wizardEyes:
-        attributesStyle.fill = window.WIZARD_ATTRIBUTES.EYES_COLORS[eyesCounter(window.WIZARD_ATTRIBUTES.EYES_COLORS)];
+        attributesStyle.fill = WIZARDS.EYES_COLORS[eyesCounter(WIZARDS.EYES_COLORS)];
         break;
       case wizardAttributes.wizardFireball:
-        attributesStyle.background = window.WIZARD_ATTRIBUTES.FIREBALL_COLORS[fireballCounter(window.WIZARD_ATTRIBUTES.FIREBALL_COLORS)];
+        attributesStyle.background = WIZARDS.FIREBALL_COLORS[fireballCounter(WIZARDS.FIREBALL_COLORS)];
         break;
     }
   }
