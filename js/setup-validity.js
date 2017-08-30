@@ -1,9 +1,9 @@
 'use strict';
 
-// Валидация формы в окне натсроек перснажа
+// Валидация формы в окне настроек перснажа
 (function () {
 
-  var userNameInput = document.querySelector('.setup-user-name');
+  var userNameInput = window.setup.querySelector('.setup-user-name');
 
   function onInputSayAboutValidity(evt) {
     var target = evt.target;
