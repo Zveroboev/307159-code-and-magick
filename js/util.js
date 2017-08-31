@@ -27,10 +27,6 @@
         '#e6e848'
       ],
       WIZARDS_QUANTITY: 4
-    },
-    START_POSITION: {
-      POSITION_X: document.querySelector('.setup').style.left,
-      POSITION_Y: document.querySelector('.setup').style.top
     }
   };
 

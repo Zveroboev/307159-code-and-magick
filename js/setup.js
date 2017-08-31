@@ -8,9 +8,10 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.setup.querySelector('.setup-close');
   var dialogHandle = window.setup.querySelector('.setup-user-pic');
-
-  var posX = window.CONSTATNS.START_POSITION.POSITION_X;
-  var posY = window.CONSTATNS.START_POSITION.POSITION_Y;
+  var startPosition = {
+    positionX: document.querySelector('.setup').style.left,
+    positionY: document.querySelector('.setup').style.top
+  };
 
   function closeSetup() {
     window.setup.classList.add('hidden');
@@ -23,8 +24,8 @@
 
     dialogHandle.removeEventListener('mousedown', window.moveSetupWindow);
 
-    window.setup.style.top = posY;
-    window.setup.style.left = posX;
+    window.setup.style.top = startPosition.positionY;
+    window.setup.style.left = startPosition.positionX;
 
     window.removeEventsForDragAndDrop();
   }

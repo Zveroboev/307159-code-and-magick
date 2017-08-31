@@ -75,7 +75,7 @@
   }
 
   function onDropHandler(evt) {
-    if (evt.target.classList.contains('setup-artifacts-cell')) {
+    if (evt.target.classList.contains('setup-artifacts-cell') && evt.target.children.length === 0) {
       evt.target.appendChild(draggedItem);
       draggedItem = null;
     }
@@ -85,7 +85,7 @@
   }
 
   function onDragEnterHandler(evt) {
-    if (evt.target.classList.contains('setup-artifacts-cell')) {
+    if (evt.target.classList.contains('setup-artifacts-cell') && evt.target.children.length === 0) {
       evt.target.style.backgroundColor = 'yellow';
     }
     evt.preventDefault();
