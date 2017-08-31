@@ -3,32 +3,46 @@
 // Открытие-закрытие окна настроек персонажа
 (function () {
 
-  var setup = document.querySelector('.setup');
+  window.setup = document.querySelector('.setup');
+
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = setup.querySelector('.setup-close');
+  var setupClose = window.setup.querySelector('.setup-close');
+  var dialogHandle = window.setup.querySelector('.setup-user-pic');
+  var startPosition = {
+    positionX: document.querySelector('.setup').style.left,
+    positionY: document.querySelector('.setup').style.top
+  };
 
   function closeSetup() {
-    setup.classList.add('hidden');
+    window.setup.classList.add('hidden');
 
-    // Удаляю обработчики закрытия
-    setupClose.removeEventListener('click', closeSetup);
     setupClose.removeEventListener('keydown', closeSetupOnKeyDown);
     document.removeEventListener('keydown', closeSetupOnPressEsc);
-    // Добавляю Обработчики открытия
+
     setupOpen.addEventListener('click', openSetup);
     setupOpen.addEventListener('keydown', openSetupOnKeyDown);
+
+    dialogHandle.removeEventListener('mousedown', window.moveSetupWindow);
+
+    window.setup.style.top = startPosition.positionY;
+    window.setup.style.left = startPosition.positionX;
+
+    window.removeEventsForDragAndDrop();
   }
 
   function openSetup() {
-    setup.classList.remove('hidden');
+    window.setup.classList.remove('hidden');
 
-    // Удаляю обработчики открытия
     setupOpen.removeEventListener('click', openSetup);
     setupOpen.removeEventListener('click', openSetupOnKeyDown);
-    // Добавляю обработчики закрытия
+
     setupClose.addEventListener('click', closeSetup);
     setupClose.addEventListener('keydown', closeSetupOnKeyDown);
     document.addEventListener('keydown', closeSetupOnPressEsc);
+
+    dialogHandle.addEventListener('mousedown', window.moveSetupWindow);
+
+    window.addEventsForDragAndDrop();
   }
 
   function openSetupOnKeyDown(evt) {
@@ -47,5 +61,3 @@
   setupOpen.addEventListener('keydown', openSetupOnKeyDown);
 
 })();
-
-
