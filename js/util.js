@@ -46,6 +46,18 @@
     },
     getRandomValue: function (array) {
       return array[this.getRandomIndex(array.length)];
+    },
+    makeCounter: function () {
+      var count = 1;
+
+      return function (array) {
+        if (count >= array.length) {
+          count = 0;
+          return count++;
+        } else {
+          return count++;
+        }
+      };
     }
   };
 
