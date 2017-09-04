@@ -41,7 +41,6 @@
   }
 
   function save(data, onLoad, onError) {
-    debugger;
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.timeout = 5000;
