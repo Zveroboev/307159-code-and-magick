@@ -25,7 +25,7 @@
 
     dialogHandle.removeEventListener('mousedown', window.moveSetupWindow);
 
-    userForm.removeEventListener('submit', submitForm, window.util.showError);
+    userForm.removeEventListener('submit', submitForm);
 
     window.setup.style.top = startPosition.positionY;
     window.setup.style.left = startPosition.positionX;
@@ -45,14 +45,14 @@
 
     dialogHandle.addEventListener('mousedown', window.moveSetupWindow);
 
-    userForm.addEventListener('submit', submitForm, window.util.showError);
+    userForm.addEventListener('submit', submitForm);
 
     window.addEventsForDragAndDrop();
   }
 
   function submitForm(evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(userForm), closeSetup);
+    window.backend.save(new FormData(userForm), closeSetup, window.util.showError);
   }
 
   function openSetupOnKeyDown(evt) {
