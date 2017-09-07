@@ -2,9 +2,13 @@
 
 (function () {
   var URL_SAVE = 'https://1510.dump.academy/code-and-magick';
-  var URL_LOAD = 'https://1510.dump.academy/code-and-magick/data';
+  var URL_LOAD = URL_SAVE + '/data';
 
-  function addEventsServer(xhr, onLoad, onError) {
+  function addXHR(timeout, onLoad, onError) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.responseType = 'json';
+    xhr.timeout = timeout || 10000;
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
         case 200:
@@ -29,23 +33,21 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
+
+    return xhr;
   }
 
   function load(onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.timeout = 10000;
+    var xhr = addXHR(10000, onLoad, onError);
+
     xhr.open('GET', URL_LOAD);
-    addEventsServer(xhr, onLoad, onError);
     xhr.send();
   }
 
   function save(data, onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.timeout = 5000;
+    var xhr = addXHR(5000, onLoad, onError);
+
     xhr.open('POST', URL_SAVE);
-    addEventsServer(xhr, onLoad, onError);
     xhr.send(data);
   }
 

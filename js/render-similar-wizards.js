@@ -5,13 +5,17 @@
   var WIZARDS = window.CONSTATNS.WIZARDS_ATTRIBUTES;
   var WIZARDS_QUANTITY = WIZARDS.WIZARDS_QUANTITY;
 
+  function getRandomIndex(number) {
+    return Math.floor(Math.random() * number);
+  }
+
   function getRandomWizards(array) {
     var wizards = [];
     var repeatedWizards = [];
 
     for (var i = 0; i < WIZARDS_QUANTITY; i++) {
       do {
-        var randomIndex = window.util.getRandomIndex(array.length);
+        var randomIndex = getRandomIndex(array.length);
       } while (repeatedWizards.indexOf(randomIndex) !== -1);
 
       wizards.push(array[randomIndex]);
