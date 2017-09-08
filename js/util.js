@@ -2,14 +2,27 @@
 
 (function () {
 
+  function showError(errorMessage) {
+    var node = document.createElement('div');
+    node.style.zIndex = 100;
+    node.style.margin = '0 auto';
+    node.style.textAlign = 'center';
+    node.style.backgroundColor = 'red';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  }
+
   window.CONSTATNS = {
     KEYCODES: {
       ESC_KEYCODE: 27,
       ENTER_KEYCODE: 13
     },
     WIZARDS_ATTRIBUTES: {
-      WIZARD_NAMES: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
-      WIZARD_SURNAMES: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
       EYES_COLORS: ['black', 'red', 'blue', 'yellow', 'green'],
       COAT_COLORS: [
         'rgb(101, 137, 164)',
@@ -41,12 +54,6 @@
         action();
       }
     },
-    getRandomIndex: function (number) {
-      return Math.floor(Math.random() * number);
-    },
-    getRandomValue: function (array) {
-      return array[this.getRandomIndex(array.length)];
-    },
     makeCounter: function () {
       var count = 1;
 
@@ -58,7 +65,8 @@
           return count++;
         }
       };
-    }
+    },
+    showError: showError
   };
 
 })();

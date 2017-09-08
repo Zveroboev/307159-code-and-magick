@@ -8,6 +8,7 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.setup.querySelector('.setup-close');
   var dialogHandle = window.setup.querySelector('.setup-user-pic');
+  var userForm = window.setup.querySelector('.setup-wizard-form');
   var startPosition = {
     positionX: document.querySelector('.setup').style.left,
     positionY: document.querySelector('.setup').style.top
@@ -23,6 +24,8 @@
     setupOpen.addEventListener('keydown', openSetupOnKeyDown);
 
     dialogHandle.removeEventListener('mousedown', window.moveSetupWindow);
+
+    userForm.removeEventListener('submit', submitForm);
 
     window.setup.style.top = startPosition.positionY;
     window.setup.style.left = startPosition.positionX;
@@ -42,7 +45,14 @@
 
     dialogHandle.addEventListener('mousedown', window.moveSetupWindow);
 
+    userForm.addEventListener('submit', submitForm);
+
     window.addEventsForDragAndDrop();
+  }
+
+  function submitForm(evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(userForm), closeSetup, window.util.showError);
   }
 
   function openSetupOnKeyDown(evt) {

@@ -2,31 +2,43 @@
 
 (function () {
   // Смена цвета элементов персонажа
-  var wizardAttributes = {
-    wizardCoat: document.querySelector('.wizard-coat'),
-    wizardFireball: document.querySelector('.setup-fireball-wrap'),
-    wizardEyes: document.querySelector('.wizard-eyes')
-  };
-
   var WIZARDS = window.CONSTATNS.WIZARDS_ATTRIBUTES;
+  var setupPlayer = document.querySelector('.setup-player');
+  var wizardAttributes = {
+    wizardCoat: setupPlayer.querySelector('.wizard-coat'),
+    wizardFireball: setupPlayer.querySelector('.setup-fireball-wrap'),
+    wizardEyes: setupPlayer.querySelector('.wizard-eyes')
+  };
 
   var coatCounter = window.util.makeCounter();
   var eyesCounter = window.util.makeCounter();
   var fireballCounter = window.util.makeCounter();
 
-  function fillElement(element, color) {
+  function fillElement(element, color, setColor) {
     element.style.fill = color;
+    setColor(color);
   }
 
-  function changeElementBackground(element, color) {
+  function changeElementBackground(element, color, setColor) {
     element.style.backgroundColor = color;
+    setColor(color);
   }
 
-  window.colorize(wizardAttributes.wizardCoat, coatCounter, WIZARDS.COAT_COLORS, fillElement);
+  function setCoatColor(color) {
+    setupPlayer.querySelector('input[name="coat-color"]').value = color;
+  }
 
-  window.colorize(wizardAttributes.wizardEyes, eyesCounter, WIZARDS.EYES_COLORS, fillElement);
+  function setEyesColor(color) {
+    setupPlayer.querySelector('input[name="eyes-color"]').value = color;
+  }
 
-  window.colorize(wizardAttributes.wizardFireball, fireballCounter, WIZARDS.FIREBALL_COLORS, changeElementBackground);
+  function setFireballColor(color) {
+    setupPlayer.querySelector('input[name="fireball-color"]').value = color;
+  }
+
+  window.colorize(wizardAttributes.wizardCoat, coatCounter, WIZARDS.COAT_COLORS, fillElement, setCoatColor);
+  window.colorize(wizardAttributes.wizardEyes, eyesCounter, WIZARDS.EYES_COLORS, fillElement, setEyesColor);
+  window.colorize(wizardAttributes.wizardFireball, fireballCounter, WIZARDS.FIREBALL_COLORS, changeElementBackground, setFireballColor);
 
   // Реализация магазина и инвентаря
   var shopElement = document.querySelector('.setup-artifacts-shop');
