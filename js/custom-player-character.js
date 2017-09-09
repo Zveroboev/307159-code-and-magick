@@ -26,17 +26,17 @@
 
   function setCoatColor(color) {
     setupPlayer.querySelector('input[name="coat-color"]').value = color;
-    window.updateWizards();
+    window.debounce(window.updateWizards);
   }
 
   function setEyesColor(color) {
     setupPlayer.querySelector('input[name="eyes-color"]').value = color;
-    window.updateWizards();
+    window.debounce(window.updateWizards);
   }
 
   function setFireballColor(color) {
     setupPlayer.querySelector('input[name="fireball-color"]').value = color;
-    window.updateWizards();
+    window.debounce(window.updateWizards);
   }
 
   window.colorize(wizardAttributes.wizardCoat, coatCounter, WIZARDS.COAT_COLORS, fillElement, setCoatColor);
