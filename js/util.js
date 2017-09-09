@@ -39,7 +39,11 @@
         '#e848d5',
         '#e6e848'
       ],
-      WIZARDS_QUANTITY: 4
+      WIZARDS_QUANTITY: 4,
+      STANDART_COAT_COLOR: 'rgb(101, 137, 164)',
+      STANDART_EYES_COLOR: 'black',
+      STANDART_FIREBALL_COLOR: '#ee4830'
+
     }
   };
 
