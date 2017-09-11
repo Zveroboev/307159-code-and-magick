@@ -7,7 +7,8 @@
 
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.setup.querySelector('.setup-close');
-  var dialogHandle = window.setup.querySelector('.setup-user-pic');
+  var dialogHandle = window.setup.querySelector('.upload');
+  var fileChooser = dialogHandle.querySelector('.upload input[type=file]');
   var userForm = window.setup.querySelector('.setup-wizard-form');
   var startPosition = {
     positionX: document.querySelector('.setup').style.left,
@@ -24,6 +25,7 @@
     setupOpen.addEventListener('keydown', openSetupOnKeyDown);
 
     dialogHandle.removeEventListener('mousedown', window.moveSetupWindow);
+    fileChooser.removeEventListener('change', window.onFileChange);
 
     userForm.removeEventListener('submit', submitForm);
 
@@ -44,6 +46,7 @@
     document.addEventListener('keydown', closeSetupOnPressEsc);
 
     dialogHandle.addEventListener('mousedown', window.moveSetupWindow);
+    fileChooser.addEventListener('change', window.onFileChange);
 
     userForm.addEventListener('submit', submitForm);
 
