@@ -13,6 +13,7 @@
 
   var wizards = [];
 
+
   function onLoad(data) {
     wizards = data;
     window.updateWizards();
@@ -20,12 +21,20 @@
 
   function renderWizard(wizard) {
     var wizardElement = document.querySelector('#similar-wizard-template').content.cloneNode(true);
-
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+    window.showPopup(wizardElement.querySelector('.wizard'), function () {
+      return renderWizardArtifacts(wizard);
+    });
 
     return wizardElement;
+  }
+
+  function renderWizardArtifacts(wizard) {
+    return wizard.artifacts.map(function (it) {
+      return it.name;
+    }).join('<br>');
   }
 
   function renderSimilarWizards(array) {
