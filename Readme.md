@@ -1,4 +1,4 @@
-# Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
+# Учебный проект «Код И Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Сергей Зверобоев](https://up.htmlacademy.ru/javascript/10/user/307159).
 
